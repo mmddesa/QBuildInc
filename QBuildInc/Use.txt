@@ -1,0 +1,76 @@
+Utilización del comando QBuildInc
+=================================
+
+QBuildInc permite el incremento auntomático del número de build en cada compilación,
+quedando reflejado en el parámetro VERSION del .pro del proyecto. Opcionalmente puede incrementar la versión, subversión y revisión
+
+Sintaxis:
+QBuildInc [V+|-]|[S+|-]|[B+|-]|[R+|-] [Filename]
+
+Si no se especifican parámetros, se incrementará el número de Build
+Si no se especifica Filename, el nombre de fichero creado será QMMDVer
+
+Si se especifica un parámetro 1, se devuelve el número final de ese parámetro
+Si no se especifica parámetro 1 válido, se devuelve el número de versión completo
+
+Permite su uso tanto para Windows como Linux
+
+Manejo
+======
+
+1) incluir en el fichero .pro las siguientes líneas (preferiblemente, tras SOURCES):
+
+include(QMMDVer)
+VERSION = $${MMD_VERV}.$${MMD_VERS}.$${MMD_VERB}.$${MMD_VERR}
+
+message($$VERSION)
+
+2) En Project -> BuildSettings, para cada una de las configuraciones, incluir en Build Steps, Add Build Steps, poniéndolo en primer lugar:
+    Command: QBuildInc (con su path si no está en el path del sistema)
+    Arguments: B+ (seguido de Filename si se quiere un nombre concreto de fichero)
+    Working Directory: %{buildDir}
+
+La primera vez se creará el fichero; las siguientes se incrementará el Build
+
+Se puede ejecutar manualmente el comando en el directorio donde está el fichero con los parámetros correspondientes para incrementar la Versión, Subversión y Revisión.
+
+Comentarios: mmddesa@gmx.com
+
+
+QBuildInc command use
+=====================
+
+QBuildInc allows automatic increase of the build number in each compilation,
+being reflected in the VERSION parameter of the project .pro file. You can optionally increase the version, subversion and revision
+
+Syntax:
+QBuildInc [V+|-]|[S+|-]|[B+|-]|[R+|-] [Filename]
+
+If no parameters are specified, the Build number will be increased
+If Filename is not specified, the created file name will be QMMDVer
+
+If a parameter 1 is specified, the final number of that parameter is returned
+If no valid parameter 1 is specified, the complete version number is returned
+
+Allows use for both Windows and Linux
+
+Use
+===
+
+1) Include the following lines in the .pro file (preferably after SOURCES):
+
+include(QMMDVer)
+VERSION = $${MMD_VERV}.$${MMD_VERS}.$${MMD_VERB}.$${MMD_VERR}
+
+message($$VERSION)
+
+2) In Project -> BuildSettings, for each of the configurations, include in Build Steps, Add Build Steps, first:
+    Command: QBuildInc (with its path if it is not on the system path)
+    Arguments: B+ (followed by Filename if you want a specific file name)
+    Working Directory: %{buildDir}
+
+The first time the file will be created; the following will increase the Build
+
+The command can be manually executed in the file's directory with the corresponding parameters to increase the Version, Subversion and Revision.
+
+Comments: mmddesa@gmx.com
